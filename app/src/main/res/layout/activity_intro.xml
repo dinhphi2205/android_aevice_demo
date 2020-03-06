@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".views.IntroActivity">
+
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/cvIntro"
+        app:autoPlay="false"
+        app:fillColor="@android:color/white"
+        app:pageColor="@android:color/black"
+        app:strokeColor="@android:color/white"
+        app:strokeWidth="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvSkip"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/skip"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnGetStarted"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_round_corner_button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/get_started"/>
+    </RelativeLayout>
+
+</LinearLayout>
