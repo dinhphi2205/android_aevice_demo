@@ -6,4 +6,10 @@
     <string name="intro_des">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</string>
     <string name="intro_2">Intro 2</string>
     <string name="intro_3">Intro 3</string>
+    <string name="years_old">%d years old</string>
+    <string name="blood_type">Blood Type: %s</string>
+    <string name="add_medication">Add Medication</string>
+    <string name="add_symtions">Add Symptoms</string>
+    <string name="summary">Summary</string>
+
 </resources>
