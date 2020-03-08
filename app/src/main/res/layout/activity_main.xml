@@ -61,11 +61,11 @@
                 android:text="@string/add_medication"/>
         </LinearLayout>
         <View
-            android:id="@+id/vAddSymptom"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@android:color/black"/>
         <LinearLayout
+            android:id="@+id/vAddSymptom"
             style="@style/layoutFlexHorizontal"
             android:orientation="vertical"
             android:gravity="center_horizontal">

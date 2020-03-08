@@ -3,6 +3,7 @@ package com.demo.aevicedemo.views;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setUpList() {
-        
+
     }
 
     void setUpButtons() {
@@ -74,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
         vSummary.setOnClickListener(view -> goToSummary());
     }
 
-    void goToAddMedication(){}
+    void goToAddMedication(){
+        startActivity(new Intent(MainActivity.this, AddMedicationActivity.class));
+    }
 
     void goToAddSymptom(){}
 

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/default_padding"
+        tools:context=".views.AddMedicationActivity">
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_date"
+            android:gravity="center"
+            android:hint="@string/hint_doctor_visit"
+            android:focusable="true"/>
+
+        <Button
+            android:id="@+id/btnAddPhoto"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_add_circle_purple"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/vInfoMedication"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivMedication"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"/>
+
+                <EditText
+                    android:id="@+id/etMedicine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/medication_name" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textCenterBlack"
+                    android:layout_weight="1"
+                    android:text="From \nTablet" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/textCenterBlack"
+                        android:text="Dose" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvDose"
+                            style="@style/textCenterBlack"
+                            android:layout_width="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="1"
+                            android:textSize="24sp" />
+
+                        <ImageView
+                            android:id="@+id/ivPlusDose"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_toEndOf="@id/tvDose"
+                            android:background="@drawable/ic_add_purple" />
+
+                        <ImageView
+                            android:id="@+id/ivMinusDose"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_toStartOf="@id/tvDose"
+                            android:background="@drawable/ic_minus_purple" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/textCenterBlack"
+                        android:text="Frequent" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvFrequent"
+                            style="@style/textCenterBlack"
+                            android:layout_width="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="1"
+                            android:textSize="24sp" />
+
+                        <ImageView
+                            android:id="@+id/ivPlusFrequent"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_toEndOf="@id/tvFrequent"
+                            android:background="@drawable/ic_add_purple" />
+
+                        <ImageView
+                            android:id="@+id/ivMinusFrequent"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_toStartOf="@id/tvFrequent"
+                            android:background="@drawable/ic_minus_purple" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/textCenterBlack"
+                    android:layout_weight="1"
+                    android:text="per day" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Take medication " />
+
+                <TextView
+                    android:id="@+id/tvBefore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Before"
+                    android:textColor="@android:color/holo_red_light" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/tvAfter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="After"
+                    android:textColor="@android:color/holo_red_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" meal." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vSelectTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_time" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_add_purple" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_round_corner_button"
+                android:text="@string/save"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
