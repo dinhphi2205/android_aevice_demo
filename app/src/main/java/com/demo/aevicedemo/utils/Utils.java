@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
@@ -70,6 +71,13 @@ public class Utils {
             }
         }
         return mypath.getAbsolutePath();
+    }
+
+    public static String currentMiliseconToHHmm() {
+        long millis = System.currentTimeMillis();
+        return String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
     }
 }
 

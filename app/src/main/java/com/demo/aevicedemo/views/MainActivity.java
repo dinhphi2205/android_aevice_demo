@@ -12,7 +12,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.demo.aevicedemo.R;
+import com.demo.aevicedemo.db.AppDatabase;
+import com.demo.aevicedemo.db.DbHelper;
+import com.demo.aevicedemo.db.dao.MedicationDao;
+import com.demo.aevicedemo.db.dao.SummaryDao;
 import com.demo.aevicedemo.models.User;
+import com.demo.aevicedemo.repositories.MedicationRepository;
 import com.demo.aevicedemo.repositories.UserRepository;
 import com.demo.aevicedemo.viewmodels.MainViewModel;
 
@@ -45,7 +50,17 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.listMedications)
     RecyclerView listMedications;
 
-    MainViewModel viewModel = new MainViewModel(new UserRepository());
+    MainViewModel viewModel = new MainViewModel(new UserRepository(), new MedicationRepository(new DbHelper(new AppDatabase() {
+        @Override
+        public MedicationDao medicationDao() {
+            return null;
+        }
+
+        @Override
+        public SummaryDao summaryDao() {
+            return null;
+        }
+    })));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
