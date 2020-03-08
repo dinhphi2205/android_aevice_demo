@@ -8,16 +8,16 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "summary")
 public class Summary {
     @ColumnInfo(name = "date")
-    String date;
+    public String date;
 
     @ColumnInfo(name = "time")
-    String time;
+    public String time;
 
     @ColumnInfo(name = "description")
-    String description;
+    public String description;
 
     @PrimaryKey(autoGenerate = true)
-    long id;
+    public long id;
 
     public Summary(String date, String time, String description, long id) {
         this.date = date;

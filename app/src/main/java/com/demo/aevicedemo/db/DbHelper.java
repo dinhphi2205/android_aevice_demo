@@ -7,10 +7,13 @@ import com.demo.aevicedemo.models.Summary;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DbHelper {
 
     private final AppDatabase mAppDatabase;
 
+    @Inject
     public DbHelper(AppDatabase mAppDatabase) {
         this.mAppDatabase = mAppDatabase;
     }

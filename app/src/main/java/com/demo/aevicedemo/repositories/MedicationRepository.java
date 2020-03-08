@@ -19,38 +19,21 @@ import com.demo.aevicedemo.models.Sympton;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.schedulers.Schedulers;
+
+
+@Singleton
 public class MedicationRepository {
     private DbHelper dbHelper;
 
-    public MedicationRepository() {
-        this.dbHelper = new DbHelper(new AppDatabase() {
-            @Override
-            public MedicationDao medicationDao() {
-                return null;
-            }
-
-            @Override
-            public SummaryDao summaryDao() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            protected InvalidationTracker createInvalidationTracker() {
-                return null;
-            }
-
-            @Override
-            public void clearAllTables() {
-
-            }
-        });
+    @Inject
+    public MedicationRepository(DbHelper dbHelper) {
+        this.dbHelper = dbHelper;
     }
 
     public LiveData<Boolean> saveMedication(Medication medication){
@@ -58,8 +41,11 @@ public class MedicationRepository {
         if(TextUtils.isEmpty(medication.getDate()) || TextUtils.isEmpty(medication.getMedicine()) || TextUtils.isEmpty(medication.getTime())) {
             data.setValue(false);
         } else {
-            dbHelper.saveMedication(medication);
-            data.setValue(true);
+             Observable.create((ObservableOnSubscribe<Boolean>) e -> {
+                 dbHelper.saveMedication(medication);
+                 e.onNext(true);
+                 e.onComplete();
+             }).subscribeOn(Schedulers.io()).subscribe(aBoolean -> data.setValue(true), throwable -> data.setValue(false));
         }
         return data;
     }
@@ -72,11 +58,23 @@ public class MedicationRepository {
         return dbHelper.loadSummary();
     }
 
-    public void markTaken(Medication medication) {
-        dbHelper.updateMedicationTaken(medication.getId());
+    public LiveData<Boolean> markTaken(Medication medication) {
+        final MutableLiveData<Boolean> data = new MutableLiveData<>();
+        Observable.create((ObservableOnSubscribe<Boolean>) e -> {
+            dbHelper.updateMedicationTaken(medication.getId());
+            e.onNext(true);
+            e.onComplete();
+        }).subscribeOn(Schedulers.io()).subscribe(aBoolean -> data.setValue(true), throwable -> data.setValue(false));
+        return data;
     }
 
-    public void saveSympton(Sympton sympton) {
-        dbHelper.insertSummary(sympton.toSummary());
+    public LiveData<Boolean> saveSympton(Sympton sympton) {
+        final MutableLiveData<Boolean> data = new MutableLiveData<>();
+        Observable.create((ObservableOnSubscribe<Boolean>) e -> {
+            dbHelper.insertSummary(sympton.toSummary());
+            e.onNext(true);
+            e.onComplete();
+        }).subscribeOn(Schedulers.io()).subscribe(aBoolean -> data.setValue(true), throwable -> data.setValue(false));
+        return data;
     }
 }

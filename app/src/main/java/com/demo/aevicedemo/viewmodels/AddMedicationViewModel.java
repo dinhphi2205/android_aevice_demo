@@ -9,10 +9,13 @@ import androidx.lifecycle.ViewModel;
 import com.demo.aevicedemo.models.Medication;
 import com.demo.aevicedemo.repositories.MedicationRepository;
 
+import javax.inject.Inject;
+
 public class AddMedicationViewModel extends ViewModel {
 
     private MedicationRepository medicationRepository;
 
+    @Inject
     public AddMedicationViewModel(MedicationRepository medicationRepository) {
         this.medicationRepository = medicationRepository;
     }

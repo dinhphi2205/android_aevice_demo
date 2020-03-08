@@ -1,32 +1,31 @@
 package com.demo.aevicedemo.views;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.demo.aevicedemo.BaseActivity;
 import com.demo.aevicedemo.R;
-import com.demo.aevicedemo.db.AppDatabase;
-import com.demo.aevicedemo.db.DbHelper;
-import com.demo.aevicedemo.db.dao.MedicationDao;
-import com.demo.aevicedemo.db.dao.SummaryDao;
+import com.demo.aevicedemo.di.DemoVMFactory;
 import com.demo.aevicedemo.models.User;
-import com.demo.aevicedemo.repositories.MedicationRepository;
-import com.demo.aevicedemo.repositories.UserRepository;
 import com.demo.aevicedemo.viewmodels.MainViewModel;
 
-import butterknife.BindInt;
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity<MainViewModel> {
 
     @BindView(R.id.ivProfile)
     ImageView ivProfile;
@@ -50,17 +49,16 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.listMedications)
     RecyclerView listMedications;
 
-    MainViewModel viewModel = new MainViewModel(new UserRepository(), new MedicationRepository(new DbHelper(new AppDatabase() {
-        @Override
-        public MedicationDao medicationDao() {
-            return null;
-        }
+    @Inject
+    ViewModelProvider.Factory factory;
 
-        @Override
-        public SummaryDao summaryDao() {
-            return null;
-        }
-    })));
+    private MainViewModel viewModel;
+
+    @Override
+    public MainViewModel getViewModel() {
+        viewModel =  new ViewModelProvider(getViewModelStore(), factory).get(MainViewModel.class);
+        return viewModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
         setUpUserView();
         setUpButtons();
         setUpList();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.loadMedications().observe(this, data -> {
+            Log.d("PHIMAI", "list medication" + data.size());
+        });
     }
 
     void setUpUserView() {
@@ -97,4 +103,6 @@ public class MainActivity extends AppCompatActivity {
     void goToAddSymptom(){}
 
     void goToSummary(){}
+
+
 }

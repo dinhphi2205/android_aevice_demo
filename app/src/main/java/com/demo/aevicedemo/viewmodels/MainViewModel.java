@@ -10,14 +10,17 @@ import com.demo.aevicedemo.repositories.UserRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainViewModel extends ViewModel {
 
     private UserRepository userRepository;
     private MedicationRepository medicationRepository;
 
+    @Inject
     public MainViewModel(UserRepository userRepository, MedicationRepository medicationRepository) {
         this.userRepository = userRepository;
-        this.medicationRepository =medicationRepository;
+        this.medicationRepository = medicationRepository;
     }
 
     public User getUser() {

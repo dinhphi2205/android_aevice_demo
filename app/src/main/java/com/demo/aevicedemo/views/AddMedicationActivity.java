@@ -2,6 +2,7 @@ package com.demo.aevicedemo.views;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -23,20 +25,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
+import com.demo.aevicedemo.BaseActivity;
 import com.demo.aevicedemo.R;
+import com.demo.aevicedemo.models.Medication;
 import com.demo.aevicedemo.utils.TimePickerListener;
 import com.demo.aevicedemo.utils.Utils;
+import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
+import com.demo.aevicedemo.viewmodels.MainViewModel;
 import com.demo.aevicedemo.views.adapters.TimeAdapter;
+import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.Calendar;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddMedicationActivity extends AppCompatActivity {
+public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> {
     @BindView(R.id.etDate)
     EditText etDate;
     @BindView(R.id.btnAddPhoto)
@@ -76,6 +86,18 @@ public class AddMedicationActivity extends AppCompatActivity {
     int currentDose = 2;
     int currentFrequent = 2;
     String[] times = new String[0];
+    boolean isBefore = true;
+
+    @Inject
+    ViewModelProvider.Factory factory;
+
+    AddMedicationViewModel viewModel;
+
+    @Override
+    public AddMedicationViewModel getViewModel() {
+        viewModel =  new ViewModelProvider(getViewModelStore(), factory).get(AddMedicationViewModel.class);
+        return viewModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +140,21 @@ public class AddMedicationActivity extends AppCompatActivity {
             Utils.underlineTextview(tvAfter);
             tvBefore.setText("Before");
         });
+        btnSave.setOnClickListener(view -> {
+            Medication medication = new Medication(
+                    etDate.getText().toString(),
+                    etMedicine.getText().toString(),
+                    Integer.parseInt(tvDose.getText().toString()),
+                    Integer.parseInt(tvFrequent.getText().toString()),
+                    isBefore,
+                    TextUtils.join(",",times),
+                    0);
+            viewModel.saveMedication(medication).observe(this, success ->{
+                if (success) finish();
+                else Toast.makeText(this, "Please check your input!!!", Toast.LENGTH_SHORT).show();
+            });
+            finish();
+        });
     }
     void processDose(int add) {
         currentDose += add;
@@ -159,7 +196,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         int year = cldr.get(Calendar.YEAR);
         // date picker dialog
         picker = new DatePickerDialog(AddMedicationActivity.this,
-                (view1, year1, monthOfYear, dayOfMonth) -> etDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1), year, month, day);
+                (view1, year1, monthOfYear, dayOfMonth) -> etDate.setText(dayOfMonth + "/" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : String.format("0%d", (monthOfYear + 1))) + "/" + year1), year, month, day);
         picker.getDatePicker().setMinDate(System.currentTimeMillis());
         picker.show();
     }
