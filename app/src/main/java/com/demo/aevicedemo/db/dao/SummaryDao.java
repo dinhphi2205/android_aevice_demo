@@ -16,6 +16,6 @@ public interface SummaryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Summary summary);
 
-    @Query("SELECT * FROM summary ORDER BY date DESC, time ASC")
+    @Query("SELECT * FROM summary ORDER BY date DESC , time ASC")
     LiveData<List<Summary>> loadAll();
 }

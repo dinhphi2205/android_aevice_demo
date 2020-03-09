@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
 import com.demo.aevicedemo.viewmodels.AddSymptomViewModel;
 import com.demo.aevicedemo.viewmodels.MainViewModel;
+import com.demo.aevicedemo.viewmodels.SummaryViewModel;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -26,6 +27,7 @@ public class DemoVMFactory implements ViewModelProvider.Factory {
         creators.put(MainViewModel.class, () -> viewModelSubComponent.mainViewModel());
         creators.put(AddMedicationViewModel.class, () -> viewModelSubComponent.addMedicationViewModel());
         creators.put(AddSymptomViewModel.class, () -> viewModelSubComponent.addSymptomViewModel());
+        creators.put(SummaryViewModel.class, () -> viewModelSubComponent.summaryViewModel());
     }
 
     @Override

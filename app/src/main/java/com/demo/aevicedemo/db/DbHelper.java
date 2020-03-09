@@ -29,17 +29,10 @@ public class DbHelper {
 
     public void updateMedicationTaken(Medication medication) {
         this.mAppDatabase.medicationDao().updateTaken(medication.getId());
-        String result = "12:00";
         String[] times = medication.getTime().split(",");
-//        String currentHhmm = Utils.currentMiliseconToHHmm();
-//        for (int i = time.length - 1 ; i >= 0; i--) {
-//            if (time[i].compareTo(currentHhmm) < 0) {
-//                result = time[i];
-//                break;
-//            }
-//        }
-        for (int i = 0 ; i <= times.length; i++) {
-            this.mAppDatabase.summaryDao().insert(medication.toSummary(times[i]));
+        for (int i = 0 ; i < times.length; i++) {
+            Summary summary = medication.toSummary(times[i]);
+            this.mAppDatabase.summaryDao().insert(summary);
         }
     }
 

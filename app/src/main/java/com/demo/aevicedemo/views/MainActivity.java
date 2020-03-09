@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,7 +44,10 @@ public class MainActivity extends BaseActivity<MainViewModel> {
     LinearLayout vAddSymptom;
     @BindView(R.id.vSummary)
     LinearLayout vSummary;
-
+    @BindView(R.id.tvHintTaken)
+    TextView tvHintTaken;
+    @BindView(R.id.tvEmpty)
+    TextView tvEmpty;
     @BindView(R.id.listMedications)
     RecyclerView listMedications;
 
@@ -78,6 +82,8 @@ public class MainActivity extends BaseActivity<MainViewModel> {
     void reloadListMedication() {
         layoutManager = new StickyHeaderGridLayoutManager(3);
         viewModel.loadMedications().observe(this, data -> {
+            tvHintTaken.setVisibility(data.size() > 0 ? View.VISIBLE : View.GONE);
+            tvEmpty.setVisibility(data.size() == 0 ? View.VISIBLE : View.GONE);
             layoutManager.setSpanSizeLookup(new StickyHeaderGridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int section, int position) {
@@ -115,7 +121,9 @@ public class MainActivity extends BaseActivity<MainViewModel> {
         startActivity(new Intent(MainActivity.this, SymptomActivity.class));
     }
 
-    void goToSummary(){}
+    void goToSummary(){
+        startActivity(new Intent(MainActivity.this, SummaryActivity.class));
+    }
 
 
 }

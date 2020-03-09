@@ -66,7 +66,7 @@ public class SymptomActivity extends BaseActivity<AddSymptomViewModel> {
         setContentView(R.layout.activity_symptom);
         ButterKnife.bind(this);
 
-        tvCurrentDate.setText(Utils.currentDate("ddd MMMM yyyy"));
+        tvCurrentDate.setText(Utils.currentDate("dd MMMM yyyy"));
 
         coughGroup.check(R.id.cbCoughModerate);
         wheezeGroup.check(R.id.cbWheezeModerate);

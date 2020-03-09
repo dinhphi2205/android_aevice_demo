@@ -9,6 +9,7 @@
     <string name="years_old">%d years old</string>
     <string name="blood_type">Blood Type: %s</string>
     <string name="add_medication">Add Medication</string>
+    <string name="add_medication_pre">Add Prescribed Medication</string>
     <string name="add_symtions">Add Symptoms</string>
     <string name="summary">Summary</string>
     <string name="hint_doctor_visit">Date of doctor visit</string>
@@ -22,6 +23,7 @@
     <string name="cough">Cough</string>
     <string name="wheeze">Wheeze</string>
     <string name="other_symptons">Other Symptons</string>
+    <string name="no_data">You have not any medication</string>
 
     <string-array name="times">
         <item>00:00</item>

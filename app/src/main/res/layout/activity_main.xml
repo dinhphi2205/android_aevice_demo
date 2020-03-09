@@ -104,12 +104,20 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvHintTaken"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="@string/taken_question"/>
+    <TextView
+        android:id="@+id/tvEmpty"
+        style="@style/textCenterBlack"
+        android:textSize="18sp"
+        android:paddingTop="50dp"
+        android:textStyle="bold"
+        android:text="@string/no_data"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listMedications"
         android:layout_width="match_parent"

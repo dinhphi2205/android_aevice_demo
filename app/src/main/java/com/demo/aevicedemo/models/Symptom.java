@@ -18,7 +18,7 @@ public class Symptom {
     public Summary toSummary() {
         return new Summary(
                 date,
-                Utils.currentMiliseconToHHmm(),
+                Utils.currentDate("HH:mm"),
                 String.format("%s cough\n%s wheeze\n%s",
                         coughLevel == 1 ? SymphtomLevel.MILD.toString() : coughLevel == 2 ? SymphtomLevel.MODERATE.toString(): SymphtomLevel.SERVERE.toString(),
                         wheezeLevel == 1 ? SymphtomLevel.MILD.toString() : wheezeLevel == 2 ? SymphtomLevel.MODERATE.toString(): SymphtomLevel.SERVERE.toString(),

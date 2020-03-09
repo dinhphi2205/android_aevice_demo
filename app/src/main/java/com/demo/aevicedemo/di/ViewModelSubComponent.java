@@ -3,6 +3,7 @@ package com.demo.aevicedemo.di;
 import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
 import com.demo.aevicedemo.viewmodels.AddSymptomViewModel;
 import com.demo.aevicedemo.viewmodels.MainViewModel;
+import com.demo.aevicedemo.viewmodels.SummaryViewModel;
 
 import dagger.Subcomponent;
 
@@ -16,4 +17,5 @@ public interface ViewModelSubComponent {
     MainViewModel mainViewModel();
     AddMedicationViewModel addMedicationViewModel();
     AddSymptomViewModel addSymptomViewModel();
+    SummaryViewModel summaryViewModel();
 }

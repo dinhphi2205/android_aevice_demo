@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.demo.aevicedemo.R;
@@ -91,7 +90,7 @@ public class MedicationAdapter extends StickyHeaderGridAdapter {
         }
     }
 
-    public  class HeaderVH extends HeaderViewHolder {
+    class HeaderVH extends HeaderViewHolder {
 
         HeaderVH(View itemView) {
             super(itemView);

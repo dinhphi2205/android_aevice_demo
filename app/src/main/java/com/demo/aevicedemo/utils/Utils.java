@@ -83,11 +83,11 @@ public class Utils {
         return dateFormat.format(date);
     }
 
-    public static String currentMiliseconToHHmm() {
-        long millis = System.currentTimeMillis();
-        return String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1));
-    }
+//    public static String currentMiliseconToHHmm() {
+//        long millis = System.currentTimeMillis();
+//        return String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis) % TimeUnit.DAYS.toHours(1) ,
+//                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1));
+//    }
 
     public static void showDialogInputText(Context context, OnSymptonsInput listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

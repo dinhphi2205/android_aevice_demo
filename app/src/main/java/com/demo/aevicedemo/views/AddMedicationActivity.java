@@ -138,11 +138,13 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
                     isBefore,
                     TextUtils.join(",",times),
                     0);
-            viewModel.saveMedication(medication).observe(this, success ->{
-                if (success) finish();
-                else Toast.makeText(this, "Please check your input!!!", Toast.LENGTH_SHORT).show();
+            viewModel.saveMedication(medication).observe(this, success -> {
+                if (success) {
+                    finish();
+                    Toast.makeText(this, "Add medication success!!!", Toast.LENGTH_LONG).show();
+                }
+                else {Toast.makeText(this, "Please check your input!!!", Toast.LENGTH_SHORT).show();}
             });
-            finish();
         });
     }
     void processDose(int add) {
@@ -168,6 +170,7 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
             if(resultCode == Activity.RESULT_OK){
                 String result = data.getStringExtra("result");
                 etMedicine.setText(result);
+                btnAddPhoto.setVisibility(View.GONE);
                 vInfoMedication.setVisibility(View.VISIBLE);
 
                 String img = data.getStringExtra("image");

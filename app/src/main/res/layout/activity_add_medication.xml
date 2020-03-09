@@ -15,7 +15,7 @@
 
         <TextView
             style="@style/textTitle"
-            android:text="@string/add_symtions" />
+            android:text="@string/add_medication_pre" />
 
         <EditText
             android:id="@+id/etDate"
