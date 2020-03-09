@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,9 +25,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
+import com.demo.aevicedemo.alarms.AlarmReceiver;
 import com.demo.aevicedemo.base.BaseActivity;
 import com.demo.aevicedemo.R;
 import com.demo.aevicedemo.models.Medication;
+import com.demo.aevicedemo.utils.Constants;
+import com.demo.aevicedemo.utils.Prefs;
 import com.demo.aevicedemo.utils.Utils;
 import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
 import com.demo.aevicedemo.views.adapters.TimeAdapter;
@@ -91,6 +98,7 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_medication);
         ButterKnife.bind(this);
 
@@ -124,10 +132,12 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
         tvBefore.setOnClickListener(view -> {
             Utils.underlineTextview(tvBefore);
             tvAfter.setText("After");
+            isBefore = true;
         });
         tvAfter.setOnClickListener(view -> {
             Utils.underlineTextview(tvAfter);
             tvBefore.setText("Before");
+            isBefore = false;
         });
         btnSave.setOnClickListener(view -> {
             Medication medication = new Medication(
@@ -140,6 +150,7 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
                     0);
             viewModel.saveMedication(medication).observe(this, success -> {
                 if (success) {
+                    sendAlarm(medication);
                     finish();
                     Toast.makeText(this, "Add medication success!!!", Toast.LENGTH_LONG).show();
                 }
@@ -188,7 +199,7 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
         int year = cldr.get(Calendar.YEAR);
         // date picker dialog
         picker = new DatePickerDialog(AddMedicationActivity.this,
-                (view1, year1, monthOfYear, dayOfMonth) -> etDate.setText(dayOfMonth + "/" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : String.format("0%d", (monthOfYear + 1))) + "/" + year1), year, month, day);
+                (view1, year1, monthOfYear, dayOfMonth) -> etDate.setText(((dayOfMonth > 9) ? dayOfMonth : ("0" + dayOfMonth)) + "/" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : String.format("0%d", (monthOfYear + 1))) + "/" + year1), year, month, day);
         picker.getDatePicker().setMinDate(System.currentTimeMillis());
         picker.show();
     }
@@ -198,6 +209,31 @@ public class AddMedicationActivity extends BaseActivity<AddMedicationViewModel> 
             rvTime.setAdapter(new TimeAdapter(AddMedicationActivity.this, times));
             rvTime.setLayoutManager(new GridLayoutManager(AddMedicationActivity.this , 4));
         });
+
+    }
+
+    void sendAlarm(Medication medication){
+
+        Intent notifyIntent = new Intent(this, AlarmReceiver.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+
+        for (int i = 0 ; i <times.length; i++) {
+            int code = Prefs.with(this).getInt(Constants.KEY_ALARM_REQUEST_CODE ,1);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast
+                    (this, code , notifyIntent, PendingIntent.FLAG_ONE_SHOT);
+            Prefs.with(this).save(Constants.KEY_ALARM_REQUEST_CODE , ++code);
+            Calendar timeOff = Calendar.getInstance();
+            timeOff.setTimeInMillis(Utils.milisecond(medication.getDate(),"dd/MM/yyyy"));
+            String[] hours = times[i].split(":");
+            timeOff.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours[0]));
+            timeOff.set(Calendar.MINUTE, Integer.parseInt(hours[1]));
+            timeOff.set(Calendar.SECOND, 0);
+
+//set that timer as a RTC Wakeup to alarm manager object
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeOff.getTimeInMillis(), pendingIntent);
+        }
+
 
     }
 }

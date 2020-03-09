@@ -1,9 +1,11 @@
 package com.demo.aevicedemo.utils;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -14,9 +16,11 @@ import com.demo.aevicedemo.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -82,6 +86,16 @@ public class Utils {
         SimpleDateFormat dateFormat= new SimpleDateFormat(format);
         return dateFormat.format(date);
     }
+    public static long milisecond(String date , String format) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        try {
+            Date result = dateFormat.parse(date);
+            return result.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 //    public static String currentMiliseconToHHmm() {
 //        long millis = System.currentTimeMillis();
@@ -106,5 +120,6 @@ public class Utils {
 
         builder.show();
     }
+
 }
 

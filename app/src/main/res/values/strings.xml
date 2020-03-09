@@ -24,6 +24,8 @@
     <string name="wheeze">Wheeze</string>
     <string name="other_symptons">Other Symptons</string>
     <string name="no_data">You have not any medication</string>
+    <string name="channel_name">demo_chanel_demo</string>
+    <string name="channel_description">Description chanel</string>
 
     <string-array name="times">
         <item>00:00</item>

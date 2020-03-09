@@ -14,7 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.SummaryActivity"></activity>
+        <receiver
+            android:name=".alarms.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name=".alarms.AlarmService"
+            android:exported="false"></service>
+
+        <activity android:name=".views.SummaryActivity" />
         <activity
             android:name=".views.SymptomActivity"
             android:screenOrientation="portrait" />
