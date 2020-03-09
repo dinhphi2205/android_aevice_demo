@@ -111,7 +111,9 @@ public class MainActivity extends BaseActivity<MainViewModel> {
         startActivity(new Intent(MainActivity.this, AddMedicationActivity.class));
     }
 
-    void goToAddSymptom(){}
+    void goToAddSymptom(){
+        startActivity(new Intent(MainActivity.this, SymptomActivity.class));
+    }
 
     void goToSummary(){}
 

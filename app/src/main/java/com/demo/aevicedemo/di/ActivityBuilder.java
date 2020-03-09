@@ -3,6 +3,7 @@ package com.demo.aevicedemo.di;
 import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
 import com.demo.aevicedemo.views.AddMedicationActivity;
 import com.demo.aevicedemo.views.MainActivity;
+import com.demo.aevicedemo.views.SymptomActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -15,4 +16,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract AddMedicationActivity contributeAddMedicationActivity();
+
+    @ContributesAndroidInjector
+    abstract SymptomActivity contributeSymptomActivity();
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.demo.aevicedemo.db.DbHelper;
 import com.demo.aevicedemo.models.Medication;
 import com.demo.aevicedemo.models.Summary;
-import com.demo.aevicedemo.models.Sympton;
+import com.demo.aevicedemo.models.Symptom;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,10 +64,10 @@ public class MedicationRepository {
         return data;
     }
 
-    public LiveData<Boolean> saveSympton(Sympton sympton) {
+    public LiveData<Boolean> saveSympton(Symptom symptom) {
         final MutableLiveData<Boolean> data = new MutableLiveData<>();
         Observable.create((ObservableOnSubscribe<Boolean>) e -> {
-            dbHelper.insertSummary(sympton.toSummary());
+            dbHelper.insertSummary(symptom.toSummary());
             e.onNext(true);
             e.onComplete();
         })

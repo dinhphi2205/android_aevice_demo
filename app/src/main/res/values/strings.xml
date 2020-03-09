@@ -16,6 +16,12 @@
     <string name="save">Save</string>
     <string name="select_time">Select Time</string>
     <string name="taken_question">Have you taken your medication?</string>
+    <string name="mild"><u>Mild</u></string>
+    <string name="moderate"><u>Moderate</u></string>
+    <string name="severe"><u>Severe</u></string>
+    <string name="cough">Cough</string>
+    <string name="wheeze">Wheeze</string>
+    <string name="other_symptons">Other Symptons</string>
 
     <string-array name="times">
         <item>00:00</item>

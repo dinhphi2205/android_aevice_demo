@@ -5,16 +5,20 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.demo.aevicedemo.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -73,11 +77,34 @@ public class Utils {
         return mypath.getAbsolutePath();
     }
 
+    public static String currentDate(String format) {
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat(format);
+        return dateFormat.format(date);
+    }
+
     public static String currentMiliseconToHHmm() {
         long millis = System.currentTimeMillis();
         return String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1));
     }
-}
 
+    public static void showDialogInputText(Context context, OnSymptonsInput listener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("   ");
+// Set up the input
+        final EditText input = new EditText(context);
+        input.setHint("Please input other symptoms");
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        input.requestFocus();
+
+// Set up the buttons
+        builder.setPositiveButton("OK", (dialog, which) -> listener.onInput(input.getText().toString()));
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+    }
+}
 

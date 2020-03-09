@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
+import com.demo.aevicedemo.viewmodels.AddSymptomViewModel;
 import com.demo.aevicedemo.viewmodels.MainViewModel;
 
 import java.util.Map;
@@ -24,6 +25,7 @@ public class DemoVMFactory implements ViewModelProvider.Factory {
         // View models cannot be injected directly because they won't be bound to the owner's view model scope.
         creators.put(MainViewModel.class, () -> viewModelSubComponent.mainViewModel());
         creators.put(AddMedicationViewModel.class, () -> viewModelSubComponent.addMedicationViewModel());
+        creators.put(AddSymptomViewModel.class, () -> viewModelSubComponent.addSymptomViewModel());
     }
 
     @Override

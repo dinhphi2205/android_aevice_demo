@@ -15,8 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".views.SymptomActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".views.CameraActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.AddMedicationActivity"
             android:screenOrientation="portrait" />
@@ -28,12 +31,14 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="ocr"/>
+            android:value="ocr" />
     </application>
 
 </manifest>
