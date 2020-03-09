@@ -103,6 +103,13 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/taken_question"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listMedications"
         android:layout_width="match_parent"

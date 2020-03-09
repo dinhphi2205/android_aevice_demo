@@ -1,28 +1,26 @@
 package com.demo.aevicedemo.views;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.demo.aevicedemo.BaseActivity;
+import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
+import com.demo.aevicedemo.base.BaseActivity;
 import com.demo.aevicedemo.R;
-import com.demo.aevicedemo.di.DemoVMFactory;
 import com.demo.aevicedemo.models.User;
 import com.demo.aevicedemo.viewmodels.MainViewModel;
+import com.demo.aevicedemo.views.adapters.MedicationAdapter;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 
 
 public class MainActivity extends BaseActivity<MainViewModel> {
@@ -54,6 +52,8 @@ public class MainActivity extends BaseActivity<MainViewModel> {
 
     private MainViewModel viewModel;
 
+    private StickyHeaderGridLayoutManager layoutManager;
+
     @Override
     public MainViewModel getViewModel() {
         viewModel =  new ViewModelProvider(getViewModelStore(), factory).get(MainViewModel.class);
@@ -67,14 +67,29 @@ public class MainActivity extends BaseActivity<MainViewModel> {
         ButterKnife.bind(this);
         setUpUserView();
         setUpButtons();
-        setUpList();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        reloadListMedication();
+    }
+
+    void reloadListMedication() {
+        layoutManager = new StickyHeaderGridLayoutManager(3);
         viewModel.loadMedications().observe(this, data -> {
-            Log.d("PHIMAI", "list medication" + data.size());
+            layoutManager.setSpanSizeLookup(new StickyHeaderGridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int section, int position) {
+                    return 1;
+                }
+            });
+            MedicationAdapter adapter = new MedicationAdapter(MainActivity.this, data, medication -> {
+                viewModel.markTaken(medication).observe(this, success -> reloadListMedication());
+            });
+            listMedications.setLayoutManager(layoutManager);
+            listMedications.setAdapter(adapter);
+
         });
     }
 
@@ -84,10 +99,6 @@ public class MainActivity extends BaseActivity<MainViewModel> {
         tvName.setText(user.getName());
         tvYearsOld.setText(String.format(getResources().getString(R.string.years_old), user.getYearsOld()));
         tvBloodTypes.setText(String.format(getResources().getString(R.string.blood_type), user.getBloodType()));
-    }
-
-    void setUpList() {
-
     }
 
     void setUpButtons() {

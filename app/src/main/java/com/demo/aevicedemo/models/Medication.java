@@ -103,4 +103,13 @@ public class Medication {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Summary toSummary(String time) {
+        return new Summary(date, time, String.format("%d tablet of %s taken", dose, medicine), 0);
+    }
+
+    // for recycler view header only
+    public boolean isHeader() {
+        return dose == 0 && frequent == 0;
+    }
 }

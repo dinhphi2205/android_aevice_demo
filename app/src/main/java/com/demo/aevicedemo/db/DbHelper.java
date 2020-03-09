@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.demo.aevicedemo.models.Medication;
 import com.demo.aevicedemo.models.Summary;
+import com.demo.aevicedemo.utils.Utils;
 
 import java.util.List;
 
@@ -26,8 +27,20 @@ public class DbHelper {
         return this.mAppDatabase.medicationDao().loadAll(false);
     }
 
-    public void updateMedicationTaken(long id) {
-        this.mAppDatabase.medicationDao().updateTaken(id);
+    public void updateMedicationTaken(Medication medication) {
+        this.mAppDatabase.medicationDao().updateTaken(medication.getId());
+        String result = "12:00";
+        String[] times = medication.getTime().split(",");
+//        String currentHhmm = Utils.currentMiliseconToHHmm();
+//        for (int i = time.length - 1 ; i >= 0; i--) {
+//            if (time[i].compareTo(currentHhmm) < 0) {
+//                result = time[i];
+//                break;
+//            }
+//        }
+        for (int i = 0 ; i <= times.length; i++) {
+            this.mAppDatabase.summaryDao().insert(medication.toSummary(times[i]));
+        }
     }
 
     public void insertSummary(Summary summary) {

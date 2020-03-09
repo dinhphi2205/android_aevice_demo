@@ -1,5 +1,6 @@
 package com.demo.aevicedemo.viewmodels;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -29,5 +30,9 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<List<Medication>> loadMedications() {
         return medicationRepository.getListMedications();
+    }
+
+    public LiveData<Boolean> markTaken(Medication medication) {
+        return medicationRepository.markTaken(medication);
     }
 }

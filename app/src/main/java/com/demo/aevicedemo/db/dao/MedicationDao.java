@@ -5,7 +5,6 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.demo.aevicedemo.models.Medication;
 
@@ -17,7 +16,7 @@ public interface MedicationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Medication medication);
 
-    @Query("SELECT * FROM medications WHERE taken = :taken")
+    @Query("SELECT * FROM medications WHERE taken = :taken ORDER BY date")
     LiveData<List<Medication>> loadAll(boolean taken);
 
     @Query("UPDATE medications SET taken = 1 WHERE id = :id")

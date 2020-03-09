@@ -1,43 +1,32 @@
 package com.demo.aevicedemo.views;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
-import com.demo.aevicedemo.BaseActivity;
+import com.demo.aevicedemo.base.BaseActivity;
 import com.demo.aevicedemo.R;
 import com.demo.aevicedemo.models.Medication;
-import com.demo.aevicedemo.utils.TimePickerListener;
 import com.demo.aevicedemo.utils.Utils;
 import com.demo.aevicedemo.viewmodels.AddMedicationViewModel;
-import com.demo.aevicedemo.viewmodels.MainViewModel;
 import com.demo.aevicedemo.views.adapters.TimeAdapter;
-import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.Calendar;
 

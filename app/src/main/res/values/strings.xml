@@ -15,6 +15,7 @@
     <string name="medication_name">Medicine name</string>
     <string name="save">Save</string>
     <string name="select_time">Select Time</string>
+    <string name="taken_question">Have you taken your medication?</string>
 
     <string-array name="times">
         <item>00:00</item>
